@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TesteUmDcl
+namespace Teste2DCL
 {
     public partial class Form1 : Form
     {
@@ -17,21 +17,34 @@ namespace TesteUmDcl
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void label3_Click(object sender, EventArgs e)
         {
-            var BonusTotal = int.Parse(txtValorVendas.Text) * 0.05; // 5% Valor Venda 
-            var ComissaoTotal = int.Parse(txtCarrosVendidos.Text) * int.Parse(txtValorComissao.Text); // commissão para cada carro vendido
-            var SalarioTotal = int.Parse(txtSalarioFixo.Text) + ComissaoTotal + BonusTotal;
-
-            lblBonusMensal.Text = BonusTotal.ToString();
-            lblComissao.Text = ComissaoTotal.ToString();
-            lblSalarioFinal.Text = SalarioTotal.ToString();
 
         }
 
-        private void btnFechar_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            Close();
+            decimal Total = 0;
+            var valorFracao = decimal.Parse(txtValorMinuto.Text) / 10;
+
+            if (int.Parse(txtDuracaoSegundos.Text) <= 60)
+            {
+                Total = decimal.Parse(txtValorMinuto.Text);
+            }
+            else
+            {
+                for (int i = 60; i <= int.Parse(txtDuracaoSegundos.Text); i++)
+                {
+                    if (i % 6 == 0)
+                    {
+                        Total += valorFracao;
+                    }
+                    
+                }
+                Total += decimal.Parse(txtValorMinuto.Text);
+            }
+
+            lblTotalValor.Text = Total.ToString();
         }
     }
 }
